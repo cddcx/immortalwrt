@@ -120,3 +120,9 @@ jobs:
         rm -rf *.manifest
         rm -rf sha256sums
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+
+    - name: Upload firmware directory
+      uses: actions/upload-artifact@main
+      with:
+        name: immortalwrt${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
