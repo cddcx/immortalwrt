@@ -71,6 +71,10 @@ jobs:
     - name: 安装feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: 运行scripts下的补丁
+      run: |
+        [ -e scripts/OpenClash-core.sh ] && bash scripts/OpenClash-core.sh
+    
     - name: 加载files与.config diy2
       run: |
         [ -e files ] && mv files openwrt/files
@@ -78,13 +82,6 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-
-    - name: 运行scripts下的补丁
-      run: |
-        cp -rf scripts openwrt/
-        cd openwrt
-        chmod +x scripts/OpenClash-core.sh
-        [ -e scripts/OpenClash-core.sh ] && bash scripts/OpenClash-core.sh
     
     - name: 下载依赖
       id: package
