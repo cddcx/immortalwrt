@@ -17,4 +17,4 @@ echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-pa
 echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
 
 # luci-theme-kucat
-echo 'src-git luci-theme-kucat https://github.com/sirpdboy/luci-theme-kucat.git;js' >> feeds.conf.default
+echo 'src-git packages/luci-theme-kucat https://github.com/sirpdboy/luci-theme-kucat.git;js' >> feeds.conf.default
