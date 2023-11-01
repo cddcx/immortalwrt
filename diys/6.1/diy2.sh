@@ -23,7 +23,7 @@ rm -rf feeds/luci/applications/luci-app-smartdns
 rm -rf feeds/packages/net/smartdns
 rm -rf feeds/luci/applications/luci-app-ssr-plus
 
- Not generate TARGET images GZIP
+# Not generate TARGET images GZIP
 #sed -i "s/CONFIG_TARGET_IMAGES_GZIP=y/# CONFIG_TARGET_IMAGES_GZIP is not set/" .config
 
 # Not generate TARGET ROOTFS EXT4FS
