@@ -22,3 +22,18 @@ rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf feeds/luci/applications/luci-app-smartdns
 rm -rf feeds/packages/net/smartdns
 rm -rf feeds/luci/applications/luci-app-ssr-plus
+
+ Not generate TARGET images GZIP
+sed -i "s/CONFIG_TARGET_IMAGES_GZIP=y/# CONFIG_TARGET_IMAGES_GZIP is not set/" .config
+
+# Not generate TARGET ROOTFS EXT4FS
+sed -i "s/CONFIG_TARGET_ROOTFS_EXT4FS=y/# CONFIG_TARGET_ROOTFS_EXT4FS is not set/" .config
+
+# Not generate TARGET ROOTFS TARGZ
+sed -i "s/CONFIG_TARGET_ROOTFS_TARGZ=y/# CONFIG_TARGET_ROOTFS_TARGZ is not set/" .config
+
+# Not generate TARGET_KERNEL_PARTSIZE
+sed -i "s/CONFIG_TARGET_KERNEL_PARTSIZE=*/CONFIG_TARGET_KERNEL_PARTSIZE=80/" .config
+
+# Not generate TARGET_ROOTFS_PARTSIZE
+sed -i "s/CONFIG_TARGET_ROOTFS_PARTSIZE=*/CONFIG_TARGET_ROOTFS_PARTSIZE=600/" .config
