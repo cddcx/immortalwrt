@@ -9,8 +9,8 @@ on:
 env:
   SOURCE_URL: https://github.com/immortalwrt/immortalwrt
   SOURCE_BRANCH: master
-  CONFIG_FILE: configs/x86_64-mini.config
-  DIY_SCRIPT: diy-mini.sh
+  CONFIG_FILE: configs/x86_64.config
+  DIY_SCRIPT: diys/diy.sh
   CLASH_KERNEL: amd64
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: X86_64
