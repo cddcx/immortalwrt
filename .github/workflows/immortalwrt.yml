@@ -110,7 +110,7 @@ jobs:
       if: steps.generate.outputs.status == 'success'
       run: |
         cd $OPENWRT_PATH/bin/targets/*/*
-        rm -rf packages *.buildinfo *.manifest *kernel.bin *rootfs.img sha256sums
+        rm -rf packages feeds.buildinfo version.buildinfo *.manifest *kernel.bin *rootfs.img sha256sums
         echo "FIRMWARE_PATH=$PWD" >> $GITHUB_ENV
 
     - name: 上传固件
