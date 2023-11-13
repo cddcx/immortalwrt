@@ -17,11 +17,6 @@ git clone https://github.com/sbwml/luci-app-alist package/alist
 #git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
 #sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
 
-# 修改include/target.mk
-sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
-
-# 修改target/linux/x86/Makefile
-sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-alist luci-app-filetransfer luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp luci-app-v2raya/g' target/linux/x86/Makefile
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
