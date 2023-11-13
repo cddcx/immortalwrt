@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 修改内核
-#sed -i 's/PATCHVER:=*.*/PATCHVER:=5.15/g' target/linux/x86/Makefile
+sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 
 # 修改include/target.mk
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
