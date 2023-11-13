@@ -18,5 +18,5 @@ git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-th
 sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
 
 
-./scripts/feeds update -a
-./scripts/feeds install -a
+#./scripts/feeds update -a
+#./scripts/feeds install -a
