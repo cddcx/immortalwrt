@@ -5,7 +5,7 @@
 #sed -i '/ luci-theme-bootstrap/d' feeds/luci/collections/luci-ssl-nginx/Makefile
 #sed -i '/ luci-theme-bootstrap/d' feeds/luci/collections/luci-light/Makefile
 
-#sed -i '/set_opt main.mediaurlbase*/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
+sed -i '/set_opt main.mediaurlbase*/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 #sed -i '/set luci.main.mediaurlbase*/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i '/set luci.main.mediaurlbase*/d' feeds/luci/themes/luci-theme-argon/root/etc/uci-defaults/30_luci-theme-argon
 #sed -i 's/luci-app-attendedsysupgrade/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -19,7 +19,7 @@ sed -i 's/root:::0:99999:7:::/root:$1$SOP5eWTA$fJV8ty3QohO0chErhlxCm1:18775:0:99
 ## 删除软件
 #rm -rf feeds/luci/applications/luci-app-adguardhome
 #rm -rf feeds/packages/net/adguardhome
-rm -rf feeds/luci/themes/luci-theme-bootstrap
+#rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
 rm -rf feeds/luci/applications/luci-app-passwall
