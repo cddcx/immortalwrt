@@ -9,6 +9,8 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 # luci-app-passwall2
 echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
 echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
+#git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall_packages
+#git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
 
 # luci-app-alist网盘管理
 git clone https://github.com/sbwml/luci-app-alist package/alist
