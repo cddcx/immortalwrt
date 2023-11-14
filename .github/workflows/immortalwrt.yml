@@ -9,7 +9,7 @@ on:
 env:
   SOURCE_URL: https://github.com/immortalwrt/immortalwrt
   SOURCE_BRANCH: master
-  CONFIG_FILE: configs/.config
+  CONFIG_FILE: configs/x86_64.config
   DIY_SCRIPT: diys/diy.sh
   CLASH_KERNEL: amd64
   FIRMWARE_RELEASE: true
