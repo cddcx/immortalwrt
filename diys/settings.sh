@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# 修改默认主题
-#sed -i '/ luci-theme-bootstrap/d' feeds/luci/collections/luci-nginx/Makefile
-#sed -i '/ luci-theme-bootstrap/d' feeds/luci/collections/luci-ssl-nginx/Makefile
-#sed -i '/ luci-theme-bootstrap/d' feeds/luci/collections/luci-light/Makefile
+# 取消主题默认设置
+#find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 
 sed -i '/set_opt main.mediaurlbase*/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i '/set luci.main.mediaurlbase*/d' feeds/luci/themes/luci-theme-argon/root/etc/uci-defaults/30_luci-theme-argon
