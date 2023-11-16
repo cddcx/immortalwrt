@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # 取消主题默认设置
-#find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
+find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 sed -i '/set_opt main.mediaurlbase*/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
-sed -i '/set luci.main.mediaurlbase*/d' feeds/luci/themes/luci-theme-argon/root/etc/uci-defaults/30_luci-theme-argon
+#sed -i '/set luci.main.mediaurlbase*/d' feeds/luci/themes/luci-theme-argon/root/etc/uci-defaults/30_luci-theme-argon
+find feeds/luci/collections/*/* -type f -name 'Makefile' -print -exec sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' {} \;
 #sed -i 's/luci-app-attendedsysupgrade/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-nginx/Makefile
-sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-ssl-nginx/Makefile
-sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-light/Makefile
+#sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-nginx/Makefile
+#sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-ssl-nginx/Makefile
+#sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' feeds/luci/collections/luci-light/Makefile
 
 # 修改密码
 sed -i 's/root:::0:99999:7:::/root:$1$SOP5eWTA$fJV8ty3QohO0chErhlxCm1:18775:0:99999:7:::/g' package/base-files/files/etc/shadow
