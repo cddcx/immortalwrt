@@ -67,7 +67,7 @@ jobs:
         cd $OPENWRT_PATH
         $GITHUB_WORKSPACE/diys/settings.sh
         $GITHUB_WORKSPACE/scripts/preset-clash-core.sh
-        $GITHUB_WORKSPACE/scripts/preset-v2raya.sh
+        $GITHUB_WORKSPACE/scripts/preset-passwall2.sh
 
     - name: 下载依赖
       run: |
