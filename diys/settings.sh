@@ -29,6 +29,6 @@ rm -rf feeds/luci/applications/luci-app-passwall
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-alist luci-app-filetransfer luci-app-openclash luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp luci-app-v2raya/g' target/linux/x86/Makefile
+sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-openclash luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp luci-app-v2raya/g' target/linux/x86/Makefile
 
 #exit 0
