@@ -20,7 +20,7 @@ sed -i 's/root:::0:99999:7:::/root:$1$SOP5eWTA$fJV8ty3QohO0chErhlxCm1:18775:0:99
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
-rm -rf feeds/luci/applications/luci-app-passwall
+#rm -rf feeds/luci/applications/luci-app-passwall
 #rm -rf feeds/luci/applications/luci-app-smartdns
 #rm -rf feeds/packages/net/smartdns
 #rm -rf feeds/luci/applications/luci-app-ssr-plus
@@ -29,6 +29,6 @@ rm -rf feeds/luci/applications/luci-app-passwall
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-openclash luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp luci-app-v2raya/g' target/linux/x86/Makefile
+sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-openclash luci-app-passwall luci-app-ttyd luci-app-udpxy luci-app-upnp/g' target/linux/x86/Makefile
 
 #exit 0
