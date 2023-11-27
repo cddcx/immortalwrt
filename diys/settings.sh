@@ -29,6 +29,6 @@ rm -rf feeds/packages/net/alist
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-openclash luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp/g' target/linux/x86/Makefile
+sed -i 's/automount/autocore default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-homeproxy luci-app-passwall2 luci-app-ttyd luci-app-udpxy luci-app-upnp/g' target/linux/x86/Makefile
 
 #exit 0
