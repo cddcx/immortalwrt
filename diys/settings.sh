@@ -27,10 +27,11 @@ rm -rf feeds/packages/net/alist
 #rm -rf feeds/luci/applications/luci-app-ssr-plus
 
 # 修改include/target.mk
+sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-chn luci-app-opkg luci-app-firewall /" include/target.mk
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
 #sed -i 's/automount/default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
-sed -i 's/automount/default-settings-chn luci-app-filetransfer luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
 
 #exit 0
