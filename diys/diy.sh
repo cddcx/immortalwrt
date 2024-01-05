@@ -12,11 +12,12 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 rm -rf package/emortal/default-settings
 git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
 
-# luci-app-passwall2
-echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
-echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
-#git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall_packages
-#git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+## luci-app-passwall2
+#git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
+#cp -rf luci-app-passwall2 package/luci-app-passwall2
+#rm -rf luci-app-passwall2
+svn checkout https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 package/luci-app-passwall2
+git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall
 
 # luci-app-xray
 #git clone https://github.com/yichya/luci-app-xray package/luci-app-xray
