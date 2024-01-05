@@ -6,6 +6,12 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 # luci-app-ssr-plus
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 
+## default-settings
+#mkdir -p package/emortal/default-settings
+#git_clone_path master https://github.com/immortalwrt/immortalwrt package/emortal/default-settings
+rm -rf package/emortal/default-settings
+git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
+
 # luci-app-passwall2
 echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
 echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
