@@ -18,10 +18,10 @@ echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main"
 #git clone https://github.com/yichya/openwrt-xray package/openwrt-xray
 
 # luci-app-alist网盘管理
-git clone https://github.com/sbwml/luci-app-alist package/alist
+#git clone https://github.com/sbwml/luci-app-alist package/alist
 
 # luci-theme-kucat
-git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
+#git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
 #sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
 
 # SmartDNS
