@@ -9,8 +9,8 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 ## default-settings
 #mkdir -p package/emortal/default-settings
 #git_clone_path master https://github.com/immortalwrt/immortalwrt package/emortal/default-settings
-rm -rf package/emortal/default-settings
-git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
+#rm -rf package/emortal/default-settings
+#git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
 
 ## luci-app-passwall2
 #git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
