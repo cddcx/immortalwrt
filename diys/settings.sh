@@ -40,6 +40,6 @@ sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
 #sed -i 's/automount/default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
-sed -i 's/automount/automount luci-app-diskman luci-app-dockerman luci-app-haproxy-tcp luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/automount luci-app-diskman luci-app-dockerman luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
 
 #exit 0
