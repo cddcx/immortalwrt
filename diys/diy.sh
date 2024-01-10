@@ -16,8 +16,8 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 #git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
 #cp -rf luci-app-passwall2 package/luci-app-passwall2
 #rm -rf luci-app-passwall2
-svn checkout https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 package/luci-app-passwall2
-git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
+git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall2
 
 # luci-app-xray
 #git clone https://github.com/yichya/luci-app-xray package/luci-app-xray
