@@ -1,5 +1,21 @@
 #!/bin/bash
 
+SHELL_FOLDER=$(dirname $(readlink -f "$0"))
+function git_clone_path() {
+          branch="$1" rurl="$2" localdir="gitemp" && shift 2
+          git clone -b $branch --depth 1 --filter=blob:none --sparse $rurl $localdir
+          if [ "$?" != 0 ]; then
+            echo "error on $rurl"
+            return 0
+          fi
+          cd $localdir
+          git sparse-checkout init --cone
+          git sparse-checkout set $@
+          mv -n $@/* ../$@/ || cp -rf $@ ../$(dirname "$@")/
+		  cd ..
+		  rm -rf gitemp
+          }
+          
 # 修改内核
 sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 
@@ -13,11 +29,13 @@ sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
 #git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
 
 ## luci-app-passwall2
-#git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
-#cp -rf luci-app-passwall2 package/luci-app-passwall2
-#rm -rf luci-app-passwall2
-git clone https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
+mkdir -p luci-app-passwall2
+git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
+cp -rf luci-app-passwall2 package/luci-app-passwall2
+rm -rf luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall2
+#git clone https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
+#git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall2
 
 # luci-app-xray
 #git clone https://github.com/yichya/luci-app-xray package/luci-app-xray
