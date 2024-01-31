@@ -60,7 +60,7 @@ jobs:
 
     - name: 加载自定义配置
       run: |
-        [ -e files ] && mv files $OPENWRT_PATH/files
+        [ -e files1 ] && mv files1/files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
         chmod +x $GITHUB_WORKSPACE/diys/*.sh
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
