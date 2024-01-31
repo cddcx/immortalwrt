@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 取消主题默认设置
-find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase*/d' {} \;
+#find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase*/d' {} \;
 #find feeds/luci/themes/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set_opt main.mediaurlbase*/d' {} \;
 #find feeds/luci/collections/*/* -type f -name 'Makefile' -print -exec sed -i 's/luci-theme-bootstrap/luci-theme-kucat/g' {} \;
 
@@ -39,7 +39,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-#sed -i 's/automount/default-settings-chn ipset luci luci-compat luci-app-filetransfer luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
-sed -i 's/automount/autocore automount luci-app-diskman luci-app-dockerman luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-passwall2/g' target/linux/x86/Makefile
+#sed -i 's/automount/autocore automount luci-app-diskman luci-app-dockerman luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
 
 #exit 0
