@@ -39,7 +39,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-passwall2/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-homeproxy luci-app-passwall2/g' target/linux/x86/Makefile
 #sed -i 's/automount/autocore automount luci-app-diskman luci-app-dockerman luci-app-passwall2 luci-app-ttyd luci-app-udpxy/g' target/linux/x86/Makefile
 
 #exit 0
