@@ -118,5 +118,5 @@ jobs:
     - name: 上传固件
       uses: actions/upload-artifact@main
       with:
-        name: OpenWrt${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: immortalwrt${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
