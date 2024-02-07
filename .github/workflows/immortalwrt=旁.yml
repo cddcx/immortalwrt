@@ -70,7 +70,7 @@ jobs:
         chmod +x $GITHUB_WORKSPACE/diys/*.sh
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
         cd $OPENWRT_PATH
-        $GITHUB_WORKSPACE/diys/settings.sh
+        $GITHUB_WORKSPACE/diys/diy2.sh
         #$GITHUB_WORKSPACE/scripts/preset-clash-core.sh
         #$GITHUB_WORKSPACE/scripts/preset-passwall2.sh
 
