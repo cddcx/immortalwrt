@@ -55,7 +55,7 @@ jobs:
       run: |
         chmod +x $GITHUB_WORKSPACE/diys/*.sh
         cd $OPENWRT_PATH
-        $GITHUB_WORKSPACE/diys/diy.sh
+        $GITHUB_WORKSPACE/diys/diy1.sh
         
     - name: 更新、安装"feeds"
       run: |
