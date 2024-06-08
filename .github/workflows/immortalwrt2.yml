@@ -1,4 +1,4 @@
-name: 旁路由
+name: 路由
 
 on:
   workflow_dispatch:
