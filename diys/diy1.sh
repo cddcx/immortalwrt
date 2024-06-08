@@ -1,50 +1,52 @@
 #!/bin/bash
+#=================================================
 
-SHELL_FOLDER=$(dirname $(readlink -f "$0"))
-function git_clone_path() {
-          branch="$1" rurl="$2" localdir="gitemp" && shift 2
-          git clone -b $branch --depth 1 --filter=blob:none --sparse $rurl $localdir
-          if [ "$?" != 0 ]; then
-            echo "error on $rurl"
-            return 0
-          fi
-          cd $localdir
-          git sparse-checkout init --cone
-          git sparse-checkout set $@
-          mv -n $@/* ../$@/ || cp -rf $@ ../$(dirname "$@")/
-		  cd ..
-		  rm -rf gitemp
-          }
-          
-# 修改内核
-sed -i 's/PATCHVER:=*.*/PATCHVER:=6.1/g' target/linux/x86/Makefile
+# 拉取仓库文件夹
+function merge_package() {
+	# 参数1是分支名,参数2是库地址,参数3是所有文件下载到指定路径。
+	# 同一个仓库下载多个文件夹直接在后面跟文件名或路径，空格分开。
+	# 示例:
+	# merge_package master https://github.com/WYC-2020/openwrt-packages package/openwrt-packages luci-app-eqos luci-app-openclash luci-app-ddnsto ddnsto 
+	# merge_package master https://github.com/lisaac/luci-app-dockerman package/lean applications/luci-app-dockerman
+	if [[ $# -lt 3 ]]; then
+		echo "Syntax error: [$#] [$*]" >&2
+		return 1
+	fi
+	trap 'rm -rf "$tmpdir"' EXIT
+	branch="$1" curl="$2" target_dir="$3" && shift 3
+	rootdir="$PWD"
+	localdir="$target_dir"
+	[ -d "$localdir" ] || mkdir -p "$localdir"
+	tmpdir="$(mktemp -d)" || exit 1
+	git clone -b "$branch" --depth 1 --filter=blob:none --sparse "$curl" "$tmpdir"
+	cd "$tmpdir"
+	git sparse-checkout init --cone
+	git sparse-checkout set "$@"
+	# 使用循环逐个移动文件夹
+	for folder in "$@"; do
+		mv -f "$folder" "$rootdir/$localdir"
+	done
+	cd "$rootdir"
+}
 
-# luci-app-ssr-plus
-#git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
+function drop_package(){
+	find package/ -follow -name $1 -not -path "package/custom/*" | xargs -rt rm -rf
+}
 
-## default-settings
-#mkdir -p package/emortal/default-settings
-#git_clone_path master https://github.com/immortalwrt/immortalwrt package/emortal/default-settings
-#rm -rf package/emortal/default-settings
-#git clone https://github.com/cddcx/default-settings.git package/emortal/default-settings
+function merge_feed(){
+	./scripts/feeds update $1
+	./scripts/feeds install -a -p $1
+}
+
+echo "开始 DIY1 配置……"
+echo "========================="
 
 ## luci-app-passwall2
-mkdir -p luci-app-passwall2
-git_clone_path main https://github.com/xiaorouji/openwrt-passwall2 luci-app-passwall2
-cp -rf luci-app-passwall2 package/luci-app-passwall2
-rm -rf luci-app-passwall2
+merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
+# 核心包
 git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall2
-#git clone https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
-#git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall2
-
-# luci-app-xray
-#git clone https://github.com/yichya/luci-app-xray package/luci-app-xray
-#git clone https://github.com/xiechangan123/luci-i18n-xray-zh-cn package/luci-i18n-xray-zh-cn
-#git clone https://github.com/yichya/openwrt-xray package/openwrt-xray
-
-# luci-app-alist网盘管理
-#git clone https://github.com/sbwml/luci-app-alist package/alist
-
+rm -rf package/passwall2/{chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-rust,shadowsocksr-libev,simple-obfs,sing-box,tcping,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
+merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall2 chinadns-ng dns2socks dns2tcp hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs sing-box tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
 # luci-theme-kucat
 #git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
 #sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
