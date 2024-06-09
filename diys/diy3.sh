@@ -57,6 +57,18 @@ sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view
 # 修复procps-ng-top导致首页cpu使用率无法获取
 sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/usr/share/rpcd/ucode/luci
 
+# unzip
+rm -rf feeds/packages/utils/unzip
+git clone https://github.com/sbwml/feeds_packages_utils_unzip feeds/packages/utils/unzip
+
+# ppp - 2.5.0
+rm -rf package/network/services/ppp
+git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
+
+# nghttp3
+rm -rf feeds/packages/libs/nghttp3
+git clone https://github.com/sbwml/package_libs_nghttp3 feeds/packages/libs/nghttp3
+
 # golang 1.22
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
@@ -66,6 +78,12 @@ sed -i 's#\"title\": \"UPnP IGD \& PCP/NAT-PMP\"#\"title\": \"UPnP\"#g' feeds/lu
 # 移动 UPnP 到 “网络” 子菜单
 sed -i 's/services/network/g' feeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 
+# 替换udpxy为修改版，解决组播源数据有重复数据包导致的花屏和马赛克问题
+rm -rf feeds/packages/net/udpxy/Makefile
+merge_package main https://github.com/lwb1978/OpenWrt-Actions feeds/packages/net/udpxy patch/udpxy/Makefile
+# 修改 udpxy 菜单名称为大写
+sed -i 's#\"title\": \"udpxy\"#\"title\": \"UDPXY\"#g' feeds/luci/applications/luci-app-udpxy/root/usr/share/luci/menu.d/luci-app-udpxy.json
+
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 # TTYD 更改
@@ -73,6 +91,13 @@ sed -i 's/services/system/g' feeds/luci/applications/luci-app-ttyd/root/usr/shar
 sed -i '3 a\\t\t"order": 50,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
+
+# 修改include/target.mk
+sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-chn luci-app-opkg luci-app-firewall /" include/target.mk
+sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
+
+# 修改target/linux/x86/Makefile
+sed -i 's/automount/luci-app-homeproxy luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
@@ -93,12 +118,23 @@ rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-cli
 merge_package main https://github.com/xiaorouji/openwrt-passwall2 feeds/luci/applications luci-app-passwall2
 git clone https://github.com/sbwml/openwrt_helloworld -v5 feeds/packages/net
 
-# 修改include/target.mk
-sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-chn luci-app-opkg luci-app-firewall /" include/target.mk
-sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
+# 修正部分从第三方仓库拉取的软件 Makefile 路径问题
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHREPO/PKG_SOURCE_URL:=https:\/\/github.com/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
 
-# 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-homeproxy luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
+# 自定义默认配置
+sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
+cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/files/99-default-settings
+
+# 拷贝自定义文件
+#if [ -n "$(ls -A "${GITHUB_WORKSPACE}/immortalwrt/diy" 2>/dev/null)" ]; then
+	#cp -Rf ${GITHUB_WORKSPACE}/immortalwrt/diy/* .
+#fi
+
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 echo "========================="
 echo " DIY2 配置完成……"
