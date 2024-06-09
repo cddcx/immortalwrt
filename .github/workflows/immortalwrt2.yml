@@ -1,4 +1,4 @@
-name: 6.6
+name: X86 Im
 
 on:
   workflow_dispatch:
