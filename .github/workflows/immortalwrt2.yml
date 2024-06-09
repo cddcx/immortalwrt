@@ -1,4 +1,4 @@
-name: 路由
+name: 6.6
 
 on:
   workflow_dispatch:
