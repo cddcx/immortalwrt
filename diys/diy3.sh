@@ -80,12 +80,18 @@ rm -rf feeds/packages/net/adguardhome
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
-rm -rf feeds/luci/applications/{luci-app-passwall,luci-app-v2raya,luci-app-shadowsocks-libev}
-rm -rf feeds/packages/net/{v2raya,shadowsocksr-libev}
-merge_package v5 https://github.com/sbwml/openwrt_helloworld feeds/packages/net shadowsocksr-libev
+rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
+rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
+
+# luci-app-passwall
+rm -rf feeds/luci/applications/luci-app-passwall
+# 核心
+rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,pdnsd-alt,shadowsocks-rust,shadowsocksr-libev,simple-obfs}
+rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
 
 ## luci-app-passwall2
-merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
+merge_package main https://github.com/xiaorouji/openwrt-passwall2 feeds/luci/applications luci-app-passwall2
+git clone https://github.com/sbwml/openwrt_helloworld -v5 feeds/packages/net
 
 # 修改include/target.mk
 sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-chn luci-app-opkg luci-app-firewall /" include/target.mk
