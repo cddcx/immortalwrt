@@ -79,8 +79,8 @@ sed -i 's#\"title\": \"UPnP IGD \& PCP/NAT-PMP\"#\"title\": \"UPnP\"#g' feeds/lu
 sed -i 's/services/network/g' feeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 
 # 替换udpxy为修改版，解决组播源数据有重复数据包导致的花屏和马赛克问题
-rm -rf feeds/packages/net/udpxy/Makefile
-merge_package main https://github.com/lwb1978/OpenWrt-Actions feeds/packages/net/udpxy patch/udpxy/Makefile
+#rm -rf feeds/packages/net/udpxy/Makefile
+#merge_package main https://github.com/lwb1978/OpenWrt-Actions feeds/packages/net/udpxy patch/udpxy/Makefile
 # 修改 udpxy 菜单名称为大写
 sed -i 's#\"title\": \"udpxy\"#\"title\": \"UDPXY\"#g' feeds/luci/applications/luci-app-udpxy/root/usr/share/luci/menu.d/luci-app-udpxy.json
 
@@ -116,7 +116,7 @@ rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-cli
 
 ## luci-app-passwall2
 merge_package main https://github.com/xiaorouji/openwrt-passwall2 feeds/luci/applications luci-app-passwall2
-git clone https://github.com/sbwml/openwrt_helloworld -v5 feeds/packages/net
+git clone https://github.com/sbwml/openwrt_helloworld -b v5 feeds/packages/net
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
