@@ -115,8 +115,8 @@ rm -rf feeds/luci/applications/luci-app-passwall
 #rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
 
 ## luci-app-passwall2
-merge_package main https://github.com/xiaorouji/openwrt-passwall2 feeds/luci/applications luci-app-passwall2
-#git clone https://github.com/sbwml/openwrt_helloworld -b v5 feeds/packages/net
+merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
+#git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
