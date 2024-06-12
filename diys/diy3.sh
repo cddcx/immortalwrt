@@ -57,25 +57,9 @@ sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view
 # 修复procps-ng-top导致首页cpu使用率无法获取
 sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/usr/share/rpcd/ucode/luci
 
-# unzip
-rm -rf feeds/packages/utils/unzip
-git clone https://github.com/sbwml/feeds_packages_utils_unzip feeds/packages/utils/unzip
-
 # ppp - 2.5.0
 rm -rf package/network/services/ppp
 git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
-
-# nghttp3
-#rm -rf feeds/packages/libs/nghttp3
-#git clone https://github.com/sbwml/package_libs_nghttp3 feeds/packages/libs/nghttp3
-
-# 替换curl修改版（无nghttp3、ngtcp2）
-curl_ver=$(cat feeds/packages/net/curl/Makefile | grep -i "PKG_VERSION:=" | awk 'BEGIN{FS="="};{print $2}' | awk 'BEGIN{FS=".";OFS="."};{print $1,$2}')
-if ((`expr $curl_ver \<= 8.8`)); then
-	echo "替换curl版本"
-	rm -rf feeds/packages/net/curl
-	git clone https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-fi
 
 # vim - fix E1187: Failed to source defaults.vim
 pushd feeds/packages
@@ -85,10 +69,6 @@ pushd feeds/packages
 		curl -s https://github.com/openwrt/packages/commit/699d3fbee266b676e21b7ed310471c0ed74012c9.patch | patch -p1
 	}
 popd
-
-# golang 1.22
-#rm -rf feeds/packages/lang/golang
-#git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
 # 精简 UPnP 菜单名称
 sed -i 's#\"title\": \"UPnP IGD \& PCP/NAT-PMP\"#\"title\": \"UPnP\"#g' feeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
@@ -125,7 +105,7 @@ rm -rf feeds/packages/net/alist
 rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
 rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
 
-# luci-app-passwall
+# 移除luci-app-passwall及核心
 rm -rf feeds/luci/applications/luci-app-passwall
 # 核心
 rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,pdnsd-alt,shadowsocks-rust,shadowsocksr-libev,simple-obfs}
