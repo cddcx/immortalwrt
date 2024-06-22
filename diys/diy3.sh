@@ -85,7 +85,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-homeproxy luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-passwall luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
@@ -97,7 +97,7 @@ rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
 rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
 
 # 移除luci-app-passwall及核心
-rm -rf feeds/luci/applications/luci-app-passwall
+#rm -rf feeds/luci/applications/luci-app-passwall
 # 核心
 rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,pdnsd-alt,shadowsocks-rust,shadowsocksr-libev,simple-obfs}
 rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
