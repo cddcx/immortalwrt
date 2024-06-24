@@ -85,7 +85,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-passwall luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-homeproxy luci-app-passwall luci-app-udpxy/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
@@ -103,7 +103,7 @@ rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2sock
 rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
 
 ## luci-app-passwall2
-merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
+#merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
 rm -rf package/passwall-packages/{chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-rust,shadowsocksr-libev,simple-obfs,sing-box}
 rm -rf package/passwall-packages/{tcping,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
