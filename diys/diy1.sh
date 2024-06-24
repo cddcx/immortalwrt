@@ -42,7 +42,7 @@ echo "开始 DIY1 配置……"
 echo "========================="
 
 ## luci-app-passwall
-merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
+#merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
 
 # luci-theme-kucat
 #git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
