@@ -85,7 +85,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-homeproxy luci-app-passwall luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-homeproxy luci-app-udpxy/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
@@ -107,9 +107,6 @@ cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/fil
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-
-echo "========================="
-echo " DIY2 配置完成……"
 
 echo "========================="
 echo " DIY2 配置完成……"
