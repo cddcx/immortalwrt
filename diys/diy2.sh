@@ -93,8 +93,8 @@ rm -rf feeds/packages/net/adguardhome
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
-rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
-rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
+#rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
+#rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
 
 # 自定义默认配置
 sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
