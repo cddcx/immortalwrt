@@ -113,8 +113,8 @@ rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,gn,hysteria,ipt2s
 rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
 
 ## luci-app-passwall2
+#merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
 merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
-#merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
 
 # 核心
 git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
