@@ -45,7 +45,7 @@ echo "========================="
 #source ${GITHUB_WORKSPACE}/subscript.sh
 
 # 修改内核
-sed -i 's/PATCHVER:=*.*/PATCHVER:=6.6/g' target/linux/x86/Makefile
+#sed -i 's/PATCHVER:=*.*/PATCHVER:=6.6/g' target/linux/x86/Makefile
 
 # 修改密码
 sed -i 's/root:::0:99999:7:::/root:$1$SOP5eWTA$fJV8ty3QohO0chErhlxCm1:18775:0:99999:7:::/g' package/base-files/files/etc/shadow
@@ -93,8 +93,8 @@ rm -rf feeds/packages/net/adguardhome
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
-#rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
-#rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
+rm -rf feeds/luci/applications/{luci-app-homeproxy,luci-app-v2raya,luci-app-shadowsocks-libev}
+rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
 
 # 自定义默认配置
 sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
