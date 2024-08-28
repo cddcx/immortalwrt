@@ -142,4 +142,4 @@ cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/fil
 ./scripts/feeds install -a
 
 echo "========================="
-echo " DIY2 配置完成……
+echo " DIY2 配置完成……"
