@@ -51,6 +51,10 @@ sed -i "s@ImmortalWrt proxy@OpenWrt proxy@g" package/luci-app-homeproxy/htdocs/l
 ## luci-app-passwall
 #merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
 
+# luci-app-mihomo
+merge_package main https://github.com/morytyann/OpenWrt-mihomo package luci-app-mihomo
+merge_package main https://github.com/morytyann/OpenWrt-mihomo package mihomo
+
 # luci-theme-kucat
 #git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
 #sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
