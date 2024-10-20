@@ -159,6 +159,7 @@ CONFIG_KERNEL_DEBUG_INFO_BTF=y
 # CONFIG_KERNEL_DEBUG_INFO_REDUCED is not set
 
 CONFIG_PACKAGE_libcron=y
+CONFIG_PACKAGE_zoneinfo-asia=y
 CONFIG_PACKAGE_kmod-xdp-sockets-diag=y
 ' >>  ./.config
 
