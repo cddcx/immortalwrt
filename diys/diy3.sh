@@ -145,7 +145,6 @@ merge_package main https://github.com/kenzok8/small-package package/helloworld l
 
 # .config
 echo '
-# CONFIG_TARGET_IMAGES_GZIP is not set
 CONFIG_TARGET_KERNEL_PARTSIZE=80
 CONFIG_TARGET_ROOTFS_PARTSIZE=600
 # CONFIG_TARGET_ROOTFS_TARGZ is not set
