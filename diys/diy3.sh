@@ -143,30 +143,8 @@ cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/fil
 #cat ${GITHUB_WORKSPACE}/netsupport.mk >> package/kernel/linux/modules/netsupport.mk
 merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
 
-echo '
-
-define KernelPackage/xdp-sockets-diag
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=PF_XDP sockets monitoring interface support for ss utility
-  KCONFIG:= \
-	CONFIG_XDP_SOCKETS=y \
-	CONFIG_XDP_SOCKETS_DIAG
-  FILES:=$(LINUX_DIR)/net/xdp/xsk_diag.ko
-  AUTOLOAD:=$(call AutoLoad,31,xsk_diag)
-endef
-
-define KernelPackage/xdp-sockets-diag/description
- Support for PF_XDP sockets monitoring interface used by the ss tool
-endef
-
-$(eval $(call KernelPackage,xdp-sockets-diag))
-' >> package/kernel/linux/modules/netsupport.mk
-
 # .config
 echo '
-CONFIG_TARGET_x86=y
-CONFIG_TARGET_x86_64=y
-CONFIG_TARGET_x86_64_DEVICE_generic=y
 # CONFIG_TARGET_IMAGES_GZIP is not set
 CONFIG_TARGET_KERNEL_PARTSIZE=80
 CONFIG_TARGET_ROOTFS_PARTSIZE=600
@@ -183,7 +161,7 @@ CONFIG_KERNEL_DEBUG_INFO_BTF=y
 
 CONFIG_PACKAGE_libcron=y
 CONFIG_PACKAGE_kmod-xdp-sockets-diag=y
-' >>  ./target/linux/x86/config-6.6
+' >>  ./.config
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
