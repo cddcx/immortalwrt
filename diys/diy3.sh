@@ -145,10 +145,6 @@ merge_package main https://github.com/kenzok8/small-package package/helloworld l
 
 # .config
 echo '
-CONFIG_TARGET_KERNEL_PARTSIZE=80
-CONFIG_TARGET_ROOTFS_PARTSIZE=600
-# CONFIG_TARGET_ROOTFS_TARGZ is not set
-
 CONFIG_DEVEL=y
 CONFIG_BPF_TOOLCHAIN_HOST=y
 # CONFIG_BPF_TOOLCHAIN_NONE is not set
@@ -157,10 +153,6 @@ CONFIG_KERNEL_CGROUP_BPF=y
 CONFIG_KERNEL_DEBUG_INFO=y
 CONFIG_KERNEL_DEBUG_INFO_BTF=y
 # CONFIG_KERNEL_DEBUG_INFO_REDUCED is not set
-
-CONFIG_PACKAGE_libcron=y
-CONFIG_PACKAGE_zoneinfo-asia=y
-CONFIG_PACKAGE_kmod-xdp-sockets-diag=y
 ' >>  ./.config
 
 ./scripts/feeds update -a
