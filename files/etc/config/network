@@ -6,7 +6,7 @@ config interface 'loopback'
 	option netmask '255.0.0.0'
 
 config globals 'globals'
-	option packet_steering '1'
+	option ula_prefix 'fd92:d12b:7ccc::/48'
 
 config device
 	option name 'br-lan'
@@ -34,8 +34,6 @@ config interface 'wan6'
 	option proto 'dhcpv6'
 	option reqaddress 'try'
 	option reqprefix 'auto'
-	option sourcefilter '0'
-
 
 config device
 	option type '8021q'
