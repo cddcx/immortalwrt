@@ -65,8 +65,8 @@ rm -rf package/network/services/ppp
 git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
 # golang 1.22
-#rm -rf feeds/packages/lang/golang
-#git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # 修复编译时提示 freeswitch 缺少 libpcre 依赖
 sed -i 's/+libpcre \\$/+libpcre2 \\/g' package/feeds/telephony/freeswitch/Makefile
@@ -130,6 +130,11 @@ rm -rf package/passwall-packages/{chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2soc
 rm -rf package/passwall-packages/{tcping,trojan,trojan-plus,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages chinadns-ng dns2socks dns2tcp hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs sing-box
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
+
+# luci-app-daed
+rm -rf feeds/luci/applications/luci-app-daed
+rm -rf feeds/packages/net/daed
+git clone https://github.com/QiuSimons/luci-app-daed package/dae
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
