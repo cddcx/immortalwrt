@@ -61,15 +61,15 @@ sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view
 sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/usr/share/rpcd/ucode/luci
 
 # ppp - 2.5.0
-rm -rf package/network/services/ppp
-git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
+#rm -rf package/network/services/ppp
+#git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
 # golang 1.22
-rm -rf feeds/packages/lang/golang
-git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+#rm -rf feeds/packages/lang/golang
+#git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # 修复编译时提示 freeswitch 缺少 libpcre 依赖
-sed -i 's/+libpcre \\$/+libpcre2 \\/g' package/feeds/telephony/freeswitch/Makefile
+#sed -i 's/+libpcre \\$/+libpcre2 \\/g' package/feeds/telephony/freeswitch/Makefile
 
 # 替换udpxy为修改版，解决组播源数据有重复数据包导致的花屏和马赛克问题
 rm -rf feeds/packages/net/udpxy/Makefile
@@ -103,7 +103,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-homeproxy luci-app-passwall2 luci-app-mihomo luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-homeproxy luci-app-passwall2 luci-app-mihomo luci-app-openclash luci-app-udpxy/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
