@@ -137,9 +137,9 @@ merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-p
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
 
 # luci-app-daed
-rm -rf feeds/luci/applications/luci-app-daed
-rm -rf feeds/packages/net/daed
-git clone https://github.com/QiuSimons/luci-app-daed package/dae
+#rm -rf feeds/luci/applications/luci-app-daed
+#rm -rf feeds/packages/net/daed
+#git clone https://github.com/QiuSimons/luci-app-daed package/dae
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
