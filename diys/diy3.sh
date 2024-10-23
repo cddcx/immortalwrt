@@ -108,6 +108,7 @@ sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
 sed -i 's/automount/luci-app-openclash luci-app-passwall2 luci-app-mihomo luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/kmod-r8101 kmod-r8125 kmod-r8126 kmod-r8168 kmod-8139cp kmod-8139too kmod-fs-f2fs/kmod-fs-f2fs/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
