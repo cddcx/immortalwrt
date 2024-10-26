@@ -69,8 +69,8 @@ rm -rf feeds/packages/lang/golang
 git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # ruby
-rm -rf feeds/packages/lang/ruby
-merge_package openwrt-23.05 https://github.com/immortalwrt/packages feeds/packages/lang/ruby lang/ruby
+#rm -rf feeds/packages/lang/ruby
+#merge_package openwrt-23.05 https://github.com/immortalwrt/packages feeds/packages/lang/ruby lang/ruby
 
 # 修复编译时提示 freeswitch 缺少 libpcre 依赖
 sed -i 's/+libpcre \\$/+libpcre2 \\/g' package/feeds/telephony/freeswitch/Makefile
@@ -107,8 +107,8 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-openclash luci-app-passwall2 luci-app-mihomo luci-app-udpxy/g' target/linux/x86/Makefile
-sed -i 's/kmod-r8101 kmod-r8125 kmod-r8126 kmod-r8168 kmod-8139cp kmod-8139too kmod-fs-f2fs/kmod-fs-f2fs/g' target/linux/x86/Makefile
+sed -i 's/automount/luci-app-passwall2 luci-app-mihomo luci-app-udpxy/g' target/linux/x86/Makefile
+#sed -i 's/kmod-r8101 kmod-r8125 kmod-r8126 kmod-r8168 kmod-8139cp kmod-8139too kmod-fs-f2fs/kmod-fs-f2fs/g' target/linux/x86/Makefile
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
