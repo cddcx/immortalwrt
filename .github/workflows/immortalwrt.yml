@@ -100,6 +100,7 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        sed -i 's/# CONFIG_PACKAGE_daed is not se/CONFIG_PACKAGE_daed=y/g' .config
 
     - name: 编译固件
       working-directory: ./openwrt
