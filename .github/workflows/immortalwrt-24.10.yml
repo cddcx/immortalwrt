@@ -1,4 +1,4 @@
-name: X86 Im
+name: immortalwrt-24.10
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: configs/x86_64.config
   DIY_P1_SH: diys/diy1.sh
   DIY_P2_SH: diys/diy2.sh
@@ -29,13 +29,24 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        sudo rm -rf /etc/apt/sources.list.d/*
+        sudo rm -rf /opt/ghc /opt/hostedtoolcache/CodeQL
+        sudo rm -rf /tmp/*
+        sudo rm -rf /usr/share/dotnet/
+        sudo rm -rf /usr/local/graalvm/
+        sudo rm -rf /usr/local/.ghcup/
+        sudo rm -rf /usr/local/share/powershell
+        sudo rm -rf /usr/local/share/chromium
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /usr/local/lib/node_modules
+        df -h
+        sudo docker image prune --all --force
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install build-essential clang llvm flex g++ gawk gcc-multilib gettext \
+        sudo -E apt-get -qq install build-essential clang-13 llvm flex g++ gawk gcc-multilib gettext \
         git libncurses5-dev libssl-dev python3-distutils python3-pyelftools python3-setuptools \
         libpython3-dev rsync unzip zlib1g-dev swig aria2 jq subversion qemu-utils ccache rename \
         libelf-dev device-tree-compiler libgnutls28-dev coccinelle libgmp3-dev libmpc-dev
         sudo -E apt-get -qq purge azure-cli ghc* zulu* firefox powershell openjdk* dotnet* google* mysql* php* android*
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
@@ -77,7 +88,7 @@ jobs:
         #$GITHUB_WORKSPACE/scripts/03-convert_translation.sh
         #$GITHUB_WORKSPACE/scripts/preset-clash-core.sh
         #$GITHUB_WORKSPACE/scripts/v2raya-dat.sh
-        $GITHUB_WORKSPACE/scripts/passwall2.sh
+        #$GITHUB_WORKSPACE/scripts/passwall2.sh
     
     - name: 下载依赖
       working-directory: ./openwrt
@@ -86,6 +97,8 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        sed -i 's/# CONFIG_PACKAGE_daed is not set/CONFIG_PACKAGE_daed=y/g' .config
+        sed -i 's/# CONFIG_PACKAGE_kmod-xdp-sockets-diag is not set/CONFIG_PACKAGE_kmod-xdp-sockets-diag=y/g' .config
 
     - name: 编译固件
       working-directory: ./openwrt
