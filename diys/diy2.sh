@@ -61,6 +61,10 @@ sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/us
 rm -rf package/network/services/ppp
 git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
+# golang 1.22
+rm -rf feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+
 # 精简 UPnP 菜单名称
 sed -i 's#\"title\": \"UPnP IGD \& PCP/NAT-PMP\"#\"title\": \"UPnP\"#g' feeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 # 移动 UPnP 到 “网络” 子菜单
@@ -85,7 +89,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-homeproxy luci-app-udpxy/g' target/linux/x86/Makefile
+sed -i 's/DEFAULT_PACKAGES += /DEFAULT_PACKAGES += luci-app-mihomo luci-app-upnp luci-app-udpxy luci-app-passwall2 /g' target/linux/x86/Makefil
 
 ## 删除软件
 rm -rf feeds/luci/applications/luci-app-adguardhome
@@ -93,8 +97,21 @@ rm -rf feeds/packages/net/adguardhome
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/packages/net/alist
-rm -rf feeds/luci/applications/{luci-app-homeproxy,luci-app-v2raya,luci-app-shadowsocks-libev}
-rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
+rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
+rm -rf feeds/packages/net/{v2raya,microsocks,shadowsocks-libev}}
+
+# 编译luci-app-daed所需内核模块
+# 依赖
+merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
+
+## 启用 eBPF 支持
+mirror=raw.githubusercontent.com/sbwml/r4s_build_script/master
+# bpf
+curl -s https://$mirror/openwrt/generic/config-bpf >> .config
+# kselftests-bpf
+curl -s https://$mirror/openwrt/patch/packages-patches/kselftests-bpf/Makefile > package/devel/kselftests-bpf/Makefile
+# BTF: fix failed to validate module
+curl -s https://$mirror/openwrt/patch/generic-24.10/0006-kernel-add-MODULE_ALLOW_BTF_MISMATCH-option.patch | patch -p1
 
 # 自定义默认配置
 sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
