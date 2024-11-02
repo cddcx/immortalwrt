@@ -136,10 +136,23 @@ rm -rf package/passwall-packages/{tcping,trojan,trojan-plus,tuic-client,v2ray-co
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages chinadns-ng dns2socks dns2tcp hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs sing-box
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
 
+# 编译luci-app-daed所需内核模块
+# 依赖
+merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
+
+## 启用 eBPF 支持
+mirror=raw.githubusercontent.com/sbwml/r4s_build_script/master
+# bpf
+curl -s https://$mirror/openwrt/generic/config-bpf >> .config
+# kselftests-bpf
+curl -s https://$mirror/openwrt/patch/packages-patches/kselftests-bpf/Makefile > package/devel/kselftests-bpf/Makefile
+# BTF: fix failed to validate module
+curl -s https://$mirror/openwrt/patch/generic-24.10/0006-kernel-add-MODULE_ALLOW_BTF_MISMATCH-option.patch | patch -p1
+
 # luci-app-daed
-#rm -rf feeds/luci/applications/luci-app-daed
-#rm -rf feeds/packages/net/daed
-#git clone https://github.com/QiuSimons/luci-app-daed package/dae
+rm -rf feeds/luci/applications/luci-app-daed
+rm -rf feeds/packages/net/daed
+git clone https://github.com/QiuSimons/luci-app-daed package/dae
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
