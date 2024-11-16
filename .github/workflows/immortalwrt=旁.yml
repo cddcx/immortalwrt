@@ -8,7 +8,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: main
   CONFIG_FILE: configs/x86_64.config
   DIY_P1_SH: diys/diy1.sh
   DIY_P2_SH: diys/diy3.sh
