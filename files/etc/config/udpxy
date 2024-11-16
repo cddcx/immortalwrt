@@ -5,5 +5,6 @@ config udpxy
 	option disabled '0'
 	option bind 'br-lan'
 	option port '4100'
-	option source 'eth1.100'
-        option max_clients '99'
+	option source 'eth1'
+	option max_clients '99'
+	option source_network 'IPYV'
