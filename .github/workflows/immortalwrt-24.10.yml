@@ -11,7 +11,7 @@ env:
   REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: configs/x86_64.config
   DIY_P1_SH: diys/diy1.sh
-  DIY_P2_SH: diys/diy2.sh
+  DIY_P2_SH: diys/diy4.sh
   FEEDS_CONF: feeds.conf.default
   FILES: files
   UPLOAD_FIRMWARE: true
@@ -42,7 +42,7 @@ jobs:
         df -h
         sudo docker image prune --all --force
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install build-essential clang-13 llvm flex g++ gawk gcc-multilib gettext \
+        sudo -E apt-get -qq install build-essential clang-18 llvm-18 flex g++ gawk gcc-multilib gettext \
         git libncurses5-dev libssl-dev python3-distutils python3-pyelftools python3-setuptools \
         libpython3-dev rsync unzip zlib1g-dev swig aria2 jq subversion qemu-utils ccache rename \
         libelf-dev device-tree-compiler libgnutls28-dev coccinelle libgmp3-dev libmpc-dev
