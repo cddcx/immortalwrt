@@ -142,29 +142,19 @@ rm -rf feeds/packages/net/daed
 git clone https://github.com/QiuSimons/luci-app-daed package/dae
 
 # 编译luci-app-daed所需内核模块
-#cat ${GITHUB_WORKSPACE}/netsupport.mk >> package/kernel/linux/modules/netsupport.mk
-merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
-
 # .config
 echo '
 CONFIG_DEVEL=y
-CONFIG_BPF_TOOLCHAIN_HOST=y
-# CONFIG_BPF_TOOLCHAIN_NONE is not set
-CONFIG_KERNEL_BPF_EVENTS=y
-CONFIG_KERNEL_CGROUP_BPF=y
 CONFIG_KERNEL_DEBUG_INFO=y
+CONFIG_KERNEL_DEBUG_INFO_REDUCED=n
 CONFIG_KERNEL_DEBUG_INFO_BTF=y
-# CONFIG_KERNEL_DEBUG_INFO_REDUCED is not set
+CONFIG_KERNEL_CGROUPS=y
+CONFIG_KERNEL_CGROUP_BPF=y
+CONFIG_KERNEL_BPF_EVENTS=y
+CONFIG_BPF_TOOLCHAIN_HOST=y
+CONFIG_KERNEL_XDP_SOCKETS=y
+CONFIG_PACKAGE_kmod-xdp-sockets-diag=y
 ' >>  ./.config
-
-# 自定义默认配置
-sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
-cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/files/99-default-settings
-
-# 拷贝自定义文件
-#if [ -n "$(ls -A "${GITHUB_WORKSPACE}/immortalwrt/diy" 2>/dev/null)" ]; then
-	#cp -Rf ${GITHUB_WORKSPACE}/immortalwrt/diy/* .
-#fi
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
