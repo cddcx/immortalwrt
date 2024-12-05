@@ -130,10 +130,6 @@ rm -rf package/passwall-packages/{tcping,trojan,trojan-plus,tuic-client,v2ray-co
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages chinadns-ng dns2socks dns2tcp hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs sing-box
 merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
 
-# 编译luci-app-daed所需内核模块
-# 依赖
-merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
-
 ## 启用 eBPF 支持
 mirror=raw.githubusercontent.com/sbwml/r4s_build_script/master
 # bpf
