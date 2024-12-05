@@ -100,10 +100,6 @@ rm -rf feeds/packages/net/alist
 rm -rf feeds/luci/applications/{luci-app-v2raya,luci-app-shadowsocks-libev}
 rm -rf feeds/packages/net/{v2raya,microsocks,shadowsocks-libev}}
 
-# 编译luci-app-daed所需内核模块
-# 依赖
-merge_package main https://github.com/kenzok8/small-package package/helloworld libcron
-
 ## 启用 eBPF 支持
 mirror=raw.githubusercontent.com/sbwml/r4s_build_script/master
 # bpf
@@ -112,10 +108,6 @@ curl -s https://$mirror/openwrt/generic/config-bpf >> .config
 curl -s https://$mirror/openwrt/patch/packages-patches/kselftests-bpf/Makefile > package/devel/kselftests-bpf/Makefile
 # BTF: fix failed to validate module
 curl -s https://$mirror/openwrt/patch/generic-24.10/0006-kernel-add-MODULE_ALLOW_BTF_MISMATCH-option.patch | patch -p1
-
-# 自定义默认配置
-sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
-cat ${GITHUB_WORKSPACE}/default-settings >> package/emortal/default-settings/files/99-default-settings
 
 # luci-app-daed
 rm -rf feeds/luci/applications/luci-app-daed
