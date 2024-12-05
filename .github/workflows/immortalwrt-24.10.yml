@@ -9,7 +9,7 @@ on:
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-24.10
-  CONFIG_FILE: configs/x86_64.config
+  CONFIG_FILE: configs/diff1.config
   DIY_P1_SH: diys/diy1.sh
   DIY_P2_SH: diys/diy4.sh
   FEEDS_CONF: feeds.conf.default
