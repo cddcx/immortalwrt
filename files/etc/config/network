@@ -13,7 +13,7 @@ config device
 	option type 'bridge'
 
 config interface 'lan'
-	option device 'br-lan'
+	option device 'eth0'
 	option proto 'static'
 	option ipaddr '192.168.3.2'
 	option netmask '255.255.255.0'
