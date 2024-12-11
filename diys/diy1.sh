@@ -55,6 +55,11 @@ sed -i "s@ImmortalWrt proxy@OpenWrt proxy@g" package/luci-app-homeproxy/htdocs/l
 merge_package main https://github.com/morytyann/OpenWrt-mihomo package luci-app-mihomo
 merge_package main https://github.com/morytyann/OpenWrt-mihomo package mihomo
 
+# bpf - add host clang-15/18/20 support
+sed -i 's/command -v clang/command -v clang clang-15 clang-18 clang-20/g' include/bpf.mk
+#sed -i "s@clang-11@clang-15 clang-18@g" include/bpf.mk
+#sed -i "s@clang-12@clang-19 clang-20@g" include/bpf.mk
+
 # luci-theme-kucat
 #git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
 #sed -i '/set luci.main.mediaurlbase*/d' package/luci-theme-kucat/root/etc/uci-defaults/30_luci-kucat
