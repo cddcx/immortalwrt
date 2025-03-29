@@ -60,10 +60,6 @@ sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view
 # 修复procps-ng-top导致首页cpu使用率无法获取
 sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/usr/share/rpcd/ucode/luci
 
-# ppp - 2.5.0
-rm -rf package/network/services/ppp
-git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
-
 # golang 1.22.0
 rm -rf feeds/packages/lang/golang
 #git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
@@ -102,44 +98,7 @@ sed -i "s/DEFAULT_PACKAGES.router:=/DEFAULT_PACKAGES.router:=default-settings-ch
 sed -i "s/kmod-nft-offload/kmod-nft-offload kmod-nft-tproxy/" include/target.mk
 
 # 修改target/linux/x86/Makefile
-sed -i 's/automount/luci-app-mihomo luci-app-passwall2 luci-app-udpxy/g' target/linux/x86/Makefile
-
-## 删除软件
-rm -rf feeds/luci/applications/luci-app-adguardhome
-rm -rf feeds/packages/net/adguardhome
-#rm -rf feeds/luci/themes/luci-theme-bootstrap
-rm -rf feeds/luci/applications/luci-app-alist
-rm -rf feeds/packages/net/alist
-rm -rf feeds/luci/applications/{luci-app-homeproxy,luci-app-v2raya,luci-app-shadowsocks-libev}
-rm -rf feeds/packages/net/{v2raya,shadowsocks-libev}
-
-# 移除luci-app-passwall及核心
-rm -rf feeds/luci/applications/luci-app-passwall
-# 核心
-rm -rf feeds/packages/net/{brook,chinadns-ng,dns2socks,dns2tcp,gn,hysteria,ipt2socks,microsocks,naiveproxy,pdnsd-alt,shadowsocks-rust,shadowsocksr-libev,simple-obfs}
-rm -rf feeds/packages/net/{sing-box,tcping,trojan-go,trojan-plus,trojan,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
-
-## luci-app-passwall2
-#merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
-merge_package main https://github.com/xiaorouji/openwrt-passwall2 package luci-app-passwall2
-
-# 核心
-git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
-rm -rf package/passwall-packages/{chinadns-ng,dns2socks,dns2tcp,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-rust,shadowsocksr-libev,simple-obfs,sing-box}
-rm -rf package/passwall-packages/{tcping,trojan,trojan-plus,tuic-client,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin}
-merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages chinadns-ng dns2socks dns2tcp hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs sing-box
-merge_package v5 https://github.com/sbwml/openwrt_helloworld  package/passwall-packages tcping trojan-plus trojan tuic-client v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin
-
-# 修正部分从第三方仓库拉取的软件 Makefile 路径问题
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHREPO/PKG_SOURCE_URL:=https:\/\/github.com/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
-
-# luci-app-daed
-rm -rf feeds/luci/applications/luci-app-daed
-rm -rf feeds/packages/net/daed
-git clone https://github.com/QiuSimons/luci-app-daed package/dae
+sed -i 's/automount/{luci-app-homeproxy luci-app-udpxy/g' target/linux/x86/Makefile
 
 # 编译luci-app-daed所需内核模块
 # .config
@@ -152,23 +111,6 @@ CONFIG_TARGET_x86_64_DEVICE_generic=y
 CONFIG_TARGET_KERNEL_PARTSIZE=80
 CONFIG_TARGET_ROOTFS_PARTSIZE=600
 # CONFIG_TARGET_ROOTFS_TARGZ is not set
-
-### BPF
-CONFIG_DEVEL=y
-CONFIG_KERNEL_DEBUG_INFO=y
-CONFIG_KERNEL_DEBUG_INFO_REDUCED=n
-CONFIG_KERNEL_DEBUG_INFO_BTF=y
-CONFIG_KERNEL_CGROUPS=y
-CONFIG_KERNEL_CGROUP_BPF=y
-CONFIG_KERNEL_BPF_EVENTS=y
-CONFIG_BPF_TOOLCHAIN_HOST=y
-CONFIG_KERNEL_XDP_SOCKETS=y
-CONFIG_PACKAGE_kmod-xdp-sockets-diag=y
-
-# Kernel - CLANG LTO
-CONFIG_KERNEL_CC="clang-15"
-CONFIG_EXTRA_OPTIMIZATION=""
-# CONFIG_PACKAGE_kselftests-bpf is not set
 ' >>  ./.config
 
 ./scripts/feeds update -a
