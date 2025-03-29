@@ -52,8 +52,8 @@ sed -i "s@ImmortalWrt proxy@OpenWrt proxy@g" package/luci-app-homeproxy/htdocs/l
 #merge_package main https://github.com/xiaorouji/openwrt-passwall package luci-app-passwall
 
 # luci-app-mihomo
-merge_package main https://github.com/nikkinikki-org/OpenWrt-nikki package luci-app-nikki
-merge_package main https://github.com/nikkinikki-org/OpenWrt-nikki package nikkio
+#merge_package main https://github.com/nikkinikki-org/OpenWrt-nikki package luci-app-nikki
+#merge_package main https://github.com/nikkinikki-org/OpenWrt-nikki package nikkio
 
 # bpf - add host clang-15/18/20 support
 sed -i 's/command -v clang/command -v clang clang-15 clang-18 clang-20/g' include/bpf.mk
